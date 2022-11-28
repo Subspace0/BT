@@ -1,0 +1,56 @@
+K near
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+
+df=pd.read_csv('diabetes.csv')
+
+df.head()
+
+df.isnull().sum()
+
+
+df.dropna(inplace=True)
+
+
+df.dropna(inplace=True)
+
+
+x=df.iloc[:,:-1]
+x.head()
+
+
+y=df.iloc[:,-1]
+y.head()
+
+
+from sklearn.model_selection import train_test_split
+
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=0)
+
+from sklearn.neighbors import KNeighborsClassifier
+
+KNN=KNeighborsClassifier(n_neighbors=5)
+KNN.fit(x_train,y_train)
+
+pred1=KNN.predict(x_test)
+
+pred1
+
+
+from sklearn.metrics import precision_score,confusion_matrix,accuracy_score,recall_score
+
+print(precision_score(pred1,y_test))
+
+print(confusion_matrix(pred1,y_test))
+
+print(accuracy_score(pred1,y_test))
+
+print(recall_score(pred1,y_test))
+
+print(accuracy_score(pred1,y_test))
+
+
