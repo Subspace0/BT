@@ -1,0 +1,83 @@
+uber
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+
+df=pd.read_csv('uber.csv')
+
+df.head()
+
+df=df.drop(['Unnamed: 0','key'],axis=1)
+
+df.head()
+
+df.dtypes
+
+df.pickup_datetime=pd.to_datetime(df.pickup_datetime)
+
+
+df.dtypes
+
+
+df.isnull().sum()
+
+
+df.dropna(inplace=True)
+
+df.isnull().sum()
+
+col=df.columns
+col
+
+df.head()
+
+df.plot(kind='box',subplots=True,layout=(6,2),figsize=(20,25))
+
+cr=df.corr()
+print(cr)
+sns.heatmap(cr)
+
+df.head()
+
+x=df.iloc[:,2:]
+x.head()
+
+y=df.iloc[:,0]
+y.head()
+
+from sklearn.model_selection import train_test_split
+
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=0)
+
+from sklearn.linear_model import LinearRegression
+
+lr=LinearRegression()
+lr.fit(x_train,y_train)
+
+pred=lr.predict(x_test)
+pred
+
+from sklearn.ensemble import RandomForestRegressor
+
+from sklearn.ensemble import RandomForestRegressor
+rr=RandomForestRegressor()
+rr.fit(x_train,y_train)
+pred2=rr.predict(x_test)
+print(pred2)
+
+pred2=rr.predict(x_test)
+pred2
+
+from sklearn.metrics import r2_score,mean_squared_error
+
+print (np.sqrt(mean_squared_error(y_test,pred)))
+
+print (np.sqrt(mean_squared_error(y_test,pred2)))
+
+print(r2_score(y_test,pred))
+
+print(r2_score(y_test,pred2))
+
