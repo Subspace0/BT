@@ -1,0 +1,26 @@
+print("non recursive")
+a=0
+b=1
+c=0
+n=int(input("enter number of values:"))
+print(a)
+print(b)
+for i in range(n-2):
+    c=a+b
+    print(c)
+    a=b
+    b=c
+    
+    
+print('recursive')
+
+n=int(input("enter number of values:"))
+
+def recursive(n):
+    if(n<=1):
+        return n
+    else:
+        return(recursive(n-1)+recursive(n-2))
+if _name=='main_':
+    for i in range (n):
+        print(recursive(i))
