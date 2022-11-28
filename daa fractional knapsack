@@ -1,0 +1,21 @@
+#fractional knapsack using greedy approach
+class Item:
+    def _init_(self,value,weight):
+            self.value=value
+            self.weight=weight
+def fractional_knapsack(W,arr):
+    arr.sort(key=lambda x:(x.value/x.weight),reverse=True)
+    res=0
+    for item in arr:
+        if(item.weight<W):
+            res=res+item.value
+            W=W-item.weight
+        else:
+            res=res+item.value*W/item.weight
+            break
+    return res
+if _name=="main_":
+    arr=[Item(50,10),Item(105,15),Item(160,20),Item(225,25)]
+    W=50
+    res=fractional_knapsack(W,arr)
+    print("Maximum value",res)
