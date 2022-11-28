@@ -1,0 +1,76 @@
+Email 
+
+import pandas as pd
+df=pd.read_csv("emails.csv")
+
+df.head()
+
+df.dtypes
+
+df=df.drop('Email No.',axis=1)
+
+df.isnull().sum
+
+
+df.dropna(inplace=True)
+
+df.shape
+
+x=df.iloc[:,:-1]
+x.head()
+
+y=df.iloc[:,-1]
+y.head()
+
+from sklearn.model_selection import train_test_split
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=0)
+
+
+from sklearn.neighbors import KNeighborsClassifier
+knn=KNeighborsClassifier(n_neighbors=7)
+knn.fit(x_train,y_train)
+
+
+pred=knn.predict(x_test)
+pred
+
+
+from sklearn.metrics import confusion_matrix,accuracy_score,precision_score,recall_score
+cm=confusion_matrix(pred,y_test)
+print(accuracy_score(pred,y_test))
+cm
+
+from sklearn.svm import SVC
+SVM=SVC(C=1.0,kernel='rbf',gamma="auto")
+SVM.fit(x_train,y_train)
+
+pred=SVM.predict(x_test)
+pred
+
+from sklearn.metrics import confusion_matrix,accuracy_score,precision_score,recall_score
+print(confusion_matrix(pred,y_test))
+print(accuracy_score(pred,y_test))
+
+
+from sklearn.neighbors import KNeighborsClassifier
+
+Knn1=KNeighborsClassifier(n_neighbors=7)
+Knn1.fit(x_train,y_train)
+
+pred1=Knn1.predict(x_test)
+
+
+from sklearn.svm import SVC
+
+SVM1=SVC(C=1.0,kernel='rbf',gamma="auto")
+SVM1.fit(x_train,y_train)
+
+ pred2=SVM1.predict(x_test)
+
+pred2
+
+from sklearn.metrics import confusion_matrix,accuracy_score
+
+print(accuracy_score(pred1,y_test))
+
+print(confusion_matrix(pred2,y_test))
